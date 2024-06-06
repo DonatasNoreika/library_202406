@@ -4,7 +4,7 @@
 {% block 'content' %}
     <h1>{{ book.title }}</h1>
     <p><strong>ISBN: </strong>{{ book.isbn }}</p>
-    <p><strong>Autorius: </strong>{{ book.author }}</p>
+    <p><strong>Autorius: </strong><a href="{% url 'author' book.author.pk %}">{{ book.author }}</a></p>
     <p><strong>Žanras: </strong>{{ book.display_genre }}</p>
     <hr>
     <p>{{ book.summary }}</p>
