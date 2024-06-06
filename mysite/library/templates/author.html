@@ -4,5 +4,12 @@
 {% block 'content' %}
     <h1>{{ author }}</h1>
     <p>{{ author.description }}</p>
-    <p><strong>Knygos: </strong>{{ author.display_books }}</p>
+    <h2>Knygos:</h2>
+    {% if author.books.all %}
+    {% for book in author.books.all %}
+    <p><a href="{% url 'book' book.pk %}">{{ book }}</a></p>
+    {% endfor %}
+    {% else %}
+    <p>Neturime šio autoriaus knygų</p>
+    {% endif %}
 {% endblock %}
