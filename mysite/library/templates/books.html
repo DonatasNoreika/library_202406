@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block 'title' %}Books{% endblock %}
+
+{% block 'content' %}
+{% if books %}
+    <h1>Knygos:</h1>
+    {% for book in books %}
+        <p><a href="">{{ book }}</a></p>
+        <hr>
+    {% endfor %}
+{% else %}
+<p>Bibliotekoje knygų nėra.</p>
+{% endif %}
+{% endblock %}
