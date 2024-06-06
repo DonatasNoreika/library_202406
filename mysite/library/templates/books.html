@@ -5,7 +5,7 @@
 {% if books %}
     <h1>Knygos:</h1>
     {% for book in books %}
-        <p><a href="">{{ book }}</a></p>
+        <p><a href="{{ book.pk }}">{{ book }}</a></p>
         <hr>
     {% endfor %}
 {% else %}

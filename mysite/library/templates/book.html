@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block 'title' %}Book{% endblock %}
+
+{% block 'content' %}
+    <h1>{{ book.title }}</h1>
+    <p><strong>ISBN: </strong>{{ book.isbn }}</p>
+    <p><strong>Autorius: </strong>{{ book.author }}</p>
+    <p><strong>Žanras: </strong>{{ book.display_genre }}</p>
+    <hr>
+    <p>{{ book.summary }}</p>
+    <hr>
+    <h2>Kopijos:</h2>
+    {% if book.instances.all %}
+    {% for copy in book.instances.all %}
+    <hr>
+<p class="{% if copy.status == 'g' %}text-success{% elif copy.status == 'p' %}text-danger{% elif copy.status == 'r' %}text-warning{% endif %}"><strong>{{ copy.get_status_display }}</strong></p>
+    {% if copy.due_back %}
+    <p><strong>Bus gražinta: </strong>{{ copy.due_back }}</p>
+    {% endif %}
+    <small class="text-muted"><strong>ID: </strong>{{ copy.uuid }}</small>
+    {% endfor %}
+    {% else %}
+    <p>Šios knygos kopijų neturime</p>
+    {% endif %}
+{% endblock %}
