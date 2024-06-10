@@ -2,9 +2,28 @@
 {% block 'title' %}Authors{% endblock %}
 
 {% block 'content' %}
-    <h1>Autoriai:</h1>
-    {% for author in authors %}
-        <p><a href="{% url 'author' author.pk %}">{{ author }}</a></p>
-        <hr>
-    {% endfor %}
+<h1>Autoriai:</h1>
+{% for author in authors %}
+<p><a href="{% url 'author' author.pk %}">{{ author }}</a></p>
+<hr>
+{% endfor %}
+<div class="container puslapiai">
+    <nav aria-label="...">
+        {% if authors.has_other_pages %}
+        <ul class="pagination pagination-sm justify-content-center">
+            {% for i in authors.paginator.page_range %}
+            {% if authors.number == i %}
+            <li class="page-item active">
+                <a class="page-link">{{ i }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
 {% endblock %}
