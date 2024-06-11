@@ -105,8 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'lt'
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'lt'
 
 TIME_ZONE = 'UTC'
 
@@ -130,3 +130,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'library/media')
 
 MEDIA_URL = '/media/'
 # print(MEDIA_ROOT) - nevenkite padebuginti, bus lengviau nepasiklysti django filesystem džiunglėse
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
