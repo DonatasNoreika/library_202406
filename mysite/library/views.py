@@ -5,6 +5,8 @@ import datetime
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 def index(request):
@@ -50,6 +52,7 @@ class BookListView(generic.ListView):
     context_object_name = "books"
     paginate_by = 6
 
+
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = "book.html"
@@ -58,7 +61,9 @@ class BookDetailView(generic.DetailView):
 
 def search(request):
     query = request.GET.get('query')
-    book_search_results = Book.objects.filter(Q(title__icontains=query) | Q(summary__icontains=query) | Q(author__first_name__icontains=query) | Q(author__last_name__icontains=query))
+    book_search_results = Book.objects.filter(
+        Q(title__icontains=query) | Q(summary__icontains=query) | Q(author__first_name__icontains=query) | Q(
+            author__last_name__icontains=query))
     author_search_results = Author.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
     context = {
         'query': query,
@@ -66,3 +71,13 @@ def search(request):
         "authors": author_search_results,
     }
     return render(request, 'search.html', context=context)
+
+
+class MyBookInstanceListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = "my_instances.html"
+    context_object_name = "instances"
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(reader=self.request.user)
+

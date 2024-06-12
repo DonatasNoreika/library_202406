@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block 'title' %}Mano paimtos knygos{% endblock %}
+
+{% block 'content' %}
+{% for instance in instances %}
+<p class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance }}</p>
+{% endfor %}
+{% endblock %}
