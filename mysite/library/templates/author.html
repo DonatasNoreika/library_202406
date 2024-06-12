@@ -3,7 +3,7 @@
 
 {% block 'content' %}
     <h1>{{ author }}</h1>
-    <p>{{ author.description }}</p>
+    <p>{{ author.description|safe }}</p>
     <h2>Knygos:</h2>
     {% if author.books.all %}
     {% for book in author.books.all %}
