@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth import password_validation
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Book, BookInstance, Author
 import datetime
@@ -6,7 +7,9 @@ from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -81,3 +84,32 @@ class MyBookInstanceListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return BookInstance.objects.filter(reader=self.request.user)
 
+@csrf_protect
+def register(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        if password == password2:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, f'Vartotojo vardas {username} užimtas!')
+                return redirect('register')
+            else:
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, f'Vartotojas su el. paštu {email} jau užregistruotas!')
+                    return redirect('register')
+                else:
+                    try:
+                        password_validation.validate_password(password)
+                    except password_validation.ValidationError as err:
+                        messages.error(request, err)
+                        return redirect('register')
+                    User.objects.create_user(username=username, email=email, password=password)
+                    messages.info(request, f'Vartotojas {username} užregistruotas!')
+                    return redirect('login')
+        else:
+            messages.error(request, "Slaptažodžiai nesutampa!")
+            return redirect('register')
+    if request.method == "GET":
+        return render(request, template_name="register.html")
