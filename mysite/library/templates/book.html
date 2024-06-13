@@ -13,6 +13,17 @@
     <p>{{ book.summary }}</p>
     <hr>
     <h2>Komentarai:</h2>
+    {% if user.is_authenticated %}
+    <div class="fieldWrapper">
+        <hr><br>
+        <h3>Palikite atsiliepimą</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.content }}
+            <br><input type="submit" class="btn btn-primary flex justify-content-end" value="Paskelbti">
+        </form>
+    </div>
+    {% endif %}
     {% if book.reviews.all %}
     {% for review in book.reviews.all %}
     <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em>
