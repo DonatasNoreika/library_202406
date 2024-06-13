@@ -12,6 +12,16 @@
     <hr>
     <p>{{ book.summary }}</p>
     <hr>
+    <h2>Komentarai:</h2>
+    {% if book.reviews.all %}
+    {% for review in book.reviews.all %}
+    <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em>
+    <p>{{ review.content }}</p>
+    {% endfor %}
+    {% else %}
+    <p>Nėra komentarų</p>
+    {% endif %}
+    <hr>
     <h2>Kopijos:</h2>
     {% if book.instances.all %}
     {% for copy in book.instances.all %}
