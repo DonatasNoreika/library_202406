@@ -9,12 +9,13 @@
     <p class="text-secondary"><strong>Vardas:</strong> {{ user.first_name }}</p>
     <p class="text-secondary"><strong>Pavardė:</strong> {{ user.last_name }}</p>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% load crispy_forms_tags %}
         <fieldset>
             <legend class="border-bottom mb-4">Profilio info</legend>
             {{ u_form | crispy }}
+            {{ p_form | crispy }}
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Atnaujinti</button>
