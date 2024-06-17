@@ -3,7 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from datetime import date
 from tinymce.models import HTMLField
-
+from PIL import Image
 
 # Create your models here.
 class Genre(models.Model):
@@ -110,3 +110,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} profilis"
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        img = Image.open(self.photo.path)
+        if img.height > 300 or img.width > 300:
+            img.thumbnail((300, 300))
+            img.save(self.photo.path)
+
+
