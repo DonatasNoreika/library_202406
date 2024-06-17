@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import BookReviewForm
+from .forms import BookReviewForm, UserUpdateForm
 from django.views.generic.edit import FormMixin
 
 
@@ -141,4 +141,24 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, "profile.html")
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        new_email = request.POST['email']
+        print("Emails:", request.user.email, new_email)
+        if new_email == "":
+            messages.error(request, f'El. paštas negali būti tuščias!')
+            return redirect('profile')
+        if request.user.email != new_email and User.objects.filter(email=new_email).exists():
+            messages.error(request, f'Vartotojas su el. paštu {new_email} jau užregistruotas!')
+            return redirect('profile')
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f"Profilis atnaujintas")
+            return redirect('profile')
+
+
+    u_form = UserUpdateForm(instance=request.user)
+    context = {
+        'u_form': u_form,
+    }
+    return render(request, "profile.html", context=context)
