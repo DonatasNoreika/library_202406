@@ -3,6 +3,7 @@
 
 {% block 'content' %}
 <div class="content-section">
+    <img class="rounded-circle account-img" src="{{ user.profile.photo.url }}">
     <h2 class="account-heading">{{ user.username }}</h2>
     <p class="text-secondary"><strong>El. paštas:</strong> {{ user.email }}</p>
     <p class="text-secondary"><strong>Vardas:</strong> {{ user.first_name }}</p>

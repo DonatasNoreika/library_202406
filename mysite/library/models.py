@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import date
 from tinymce.models import HTMLField
 
+
 # Create your models here.
 class Genre(models.Model):
     name = models.CharField(verbose_name="Pavadinimas", max_length=200,
@@ -40,7 +41,8 @@ class Book(models.Model):
     summary = models.TextField(verbose_name="Aprašymas", max_length=1000)
     isbn = models.CharField(verbose_name="ISBN", max_length=13,
                             help_text='13 Simbolių <a href="https://www.isbn-international.org/content/what-isbn">ISBN kodas</a>')
-    author = models.ForeignKey(to='Author', verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True, related_name='books')
+    author = models.ForeignKey(to='Author', verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True,
+                               related_name='books')
     genre = models.ManyToManyField(to="Genre", verbose_name="Žanrai", help_text='Išrinkite žanrą(us) šiai knygai')
     cover = models.ImageField(verbose_name="Viršelis", upload_to="covers", null=True, blank=True)
 
@@ -62,7 +64,8 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, help_text='Unikalus ID knygos kopijai')
-    book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.SET_NULL, null=True, blank=True, related_name="instances")
+    book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.SET_NULL, null=True, blank=True,
+                             related_name="instances")
     due_back = models.DateField(verbose_name="Bus prieinama", null=True, blank=True)
     reader = models.ForeignKey(to=User, verbose_name="Skaitytojas", on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -88,8 +91,10 @@ class BookInstance(models.Model):
 
 
 class BookReview(models.Model):
-    book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.SET_NULL, null=True, blank=True, related_name="reviews")
-    reviewer = models.ForeignKey(to=User, verbose_name="Komentatorius", on_delete=models.SET_NULL, null=True, blank=True)
+    book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.SET_NULL, null=True, blank=True,
+                             related_name="reviews")
+    reviewer = models.ForeignKey(to=User, verbose_name="Komentatorius", on_delete=models.SET_NULL, null=True,
+                                 blank=True)
     date_created = models.DateTimeField(verbose_name="Data", auto_now_add=True)
     content = models.TextField(verbose_name="Atsiliepimas", max_length=2000)
 
@@ -98,3 +103,10 @@ class BookReview(models.Model):
         verbose_name_plural = "Atsiliepimai"
         ordering = ['-date_created']
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    photo = models.ImageField(verbose_name="photo", default="profile_pics/default.png", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username} profilis"

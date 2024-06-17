@@ -144,7 +144,6 @@ def profile(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
         new_email = request.POST['email']
-        print("Emails:", request.user.email, new_email)
         if new_email == "":
             messages.error(request, f'El. paštas negali būti tuščias!')
             return redirect('profile')
