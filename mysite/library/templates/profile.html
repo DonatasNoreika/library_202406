@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block 'title' %}Profilis{% endblock %}
+
+{% block 'content' %}
+<div class="content-section">
+    <h2 class="account-heading">{{ user.username }}</h2>
+    <p class="text-secondary"><strong>El. paštas:</strong> {{ user.email }}</p>
+    <p class="text-secondary"><strong>Vardas:</strong> {{ user.first_name }}</p>
+    <p class="text-secondary"><strong>Pavardė:</strong> {{ user.last_name }}</p>
+</div>
+{% endblock %}

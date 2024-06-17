@@ -1,6 +1,5 @@
 from django.contrib.auth import password_validation
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
 from .models import Book, BookInstance, Author
 import datetime
 from django.views import generic
@@ -8,6 +7,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import BookReviewForm
@@ -138,3 +138,7 @@ def register(request):
             return redirect('register')
     if request.method == "GET":
         return render(request, template_name="register.html")
+
+@login_required
+def profile(request):
+    return render(request, "profile.html")
