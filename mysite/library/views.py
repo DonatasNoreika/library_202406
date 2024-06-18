@@ -178,3 +178,11 @@ class BookInstanceDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "instance.html"
     context_object_name = "instance"
 
+
+class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
+    model = BookInstance
+    template_name = "instance_form.html"
+    success_url = "/library/instances/"
+    fields = ['book', 'status', 'reader', 'due_back']
+
+
