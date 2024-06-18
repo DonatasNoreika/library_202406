@@ -2,9 +2,15 @@
 {% block 'title' %}Knygos egzempliorius{% endblock %}
 
 {% block 'content' %}
- <h1>{{ instance.book.title }} <small>({{ instance.book.author }})</small></h1>
-    <p><strong>UUID: </strong>{{ instance.uuid }}</p>
-<p><strong>Galima paimti: </strong><span  class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance.due_back }}</span></p>
-    <p><strong>Paėmė: </strong><img class="rounded-circle me-1" style="height: 25px" src="{{ instance.reader.profile.photo.url }}">{{ instance.reader }}</p>
-    <p><strong>Būsena: </strong>{{ instance.get_status_display }}</p>
+<h1>{{ instance.book.title }} <small>({{ instance.book.author }})</small></h1>
+<p><strong>UUID: </strong>{{ instance.uuid }}</p>
+<p><strong>Galima paimti: </strong><span class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance.due_back }}</span></p>
+<p>
+    <strong>Paėmė: </strong>
+    <img class="rounded-circle me-1" style="height: 25px" src="{{ instance.reader.profile.photo.url }}">{{ instance.reader }}
+</p>
+<p><strong>Būsena: </strong>{{ instance.get_status_display }}</p>
+<div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'instance_update' instance.pk %}">Redaguoti</a>
+</div>
 {% endblock %}

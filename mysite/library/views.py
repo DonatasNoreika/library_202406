@@ -186,3 +186,11 @@ class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
     fields = ['book', 'status', 'reader', 'due_back']
 
 
+class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = BookInstance
+    template_name = "instance_form.html"
+    fields = ['book', 'status', 'reader', 'due_back']
+    # success_url = "/library/instances/"
+
+    def get_success_url(self):
+        return reverse("instance", kwargs={"pk": self.object.pk})
