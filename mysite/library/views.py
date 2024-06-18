@@ -194,3 +194,9 @@ class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse("instance", kwargs={"pk": self.object.pk})
+
+class BookInstanceDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = BookInstance
+    template_name = "instance_delete.html"
+    context_object_name = "instance"
+    success_url = "/library/instances/"
