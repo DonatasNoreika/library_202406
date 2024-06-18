@@ -139,6 +139,7 @@ def register(request):
     if request.method == "GET":
         return render(request, template_name="register.html")
 
+
 @login_required
 def profile(request):
     if request.method == "POST":
@@ -157,7 +158,6 @@ def profile(request):
             messages.success(request, f"Profilis atnaujintas")
             return redirect('profile')
 
-
     u_form = UserUpdateForm(instance=request.user)
     p_form = ProfileUpdateForm(instance=request.user.profile)
     context = {
@@ -165,3 +165,9 @@ def profile(request):
         'p_form': p_form,
     }
     return render(request, "profile.html", context=context)
+
+
+class BookInstanceListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = "instances.html"
+    context_object_name = "instances"
