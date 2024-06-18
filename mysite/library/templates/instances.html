@@ -3,6 +3,6 @@
 
 {% block 'content' %}
 {% for instance in instances %}
-<p class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance }}</p>
+<p><a href="{% url 'instance' instance.pk %}">{{ instance.book.title }} ({{ instance.uuid }})</a> - {{ instance.reader }} (<span class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance.due_back }}</span>)</p>
 {% endfor %}
 {% endblock %}
