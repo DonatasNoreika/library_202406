@@ -5,7 +5,7 @@ import datetime
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -170,38 +170,56 @@ def profile(request):
     return render(request, "profile.html", context=context)
 
 
-class BookInstanceListView(LoginRequiredMixin, generic.ListView):
+class BookInstanceListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     model = BookInstance
     template_name = "instances.html"
     context_object_name = "instances"
 
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
-class BookInstanceDetailView(LoginRequiredMixin, generic.DetailView):
+
+class BookInstanceDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.DetailView):
     model = BookInstance
     template_name = "instance.html"
     context_object_name = "instance"
 
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
-class BookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
+
+class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
     model = BookInstance
     template_name = "instance_form.html"
     success_url = "/library/instances/"
     form_class = BookInstanceCreateUpdateForm
+
     # fields = ['book', 'status', 'reader', 'due_back']
 
+    def test_func(self):
+        return self.request.user.profile.is_employee
 
-class BookInstanceUpdateView(LoginRequiredMixin, generic.UpdateView):
+
+class BookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = BookInstance
     template_name = "instance_form.html"
     form_class = BookInstanceCreateUpdateForm
+
     # fields = ['book', 'status', 'reader', 'due_back']
     # success_url = "/library/instances/"
 
     def get_success_url(self):
         return reverse("instance", kwargs={"pk": self.object.pk})
 
-class BookInstanceDeleteView(LoginRequiredMixin, generic.DeleteView):
+    def test_func(self):
+        return self.request.user.profile.is_employee
+
+
+class BookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = BookInstance
     template_name = "instance_delete.html"
     context_object_name = "instance"
     success_url = "/library/instances/"
+
+    def test_func(self):
+        return self.request.user.profile.is_employee

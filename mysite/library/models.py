@@ -108,6 +108,7 @@ class BookReview(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     photo = models.ImageField(verbose_name="photo", default="profile_pics/default.png", upload_to="profile_pics")
+    is_employee = models.BooleanField(verbose_name="Darbuotojas", default=False)
 
     def __str__(self):
         return f"{self.user.username} profilis"

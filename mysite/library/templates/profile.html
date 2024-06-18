@@ -8,7 +8,7 @@
     <p class="text-secondary"><strong>El. paštas:</strong> {{ user.email }}</p>
     <p class="text-secondary"><strong>Vardas:</strong> {{ user.first_name }}</p>
     <p class="text-secondary"><strong>Pavardė:</strong> {{ user.last_name }}</p>
-
+    <p class="text-secondary"><strong>Ar darbuotojas:</strong> {% if user.is_employee %}Taip{% else %}Ne{% endif %}</p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% load crispy_forms_tags %}
