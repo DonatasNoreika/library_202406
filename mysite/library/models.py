@@ -64,7 +64,7 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, help_text='Unikalus ID knygos kopijai')
-    book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.SET_NULL, null=True, blank=True,
+    book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.CASCADE,
                              related_name="instances")
     due_back = models.DateField(verbose_name="Bus prieinama", null=True, blank=True)
     reader = models.ForeignKey(to=User, verbose_name="Skaitytojas", on_delete=models.SET_NULL, null=True, blank=True)
