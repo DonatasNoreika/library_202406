@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-19 10:01+0300\n"
-"PO-Revision-Date: 2024-06-19 10:04+0300\n"
+"POT-Creation-Date: 2024-06-19 10:35+0300\n"
+"PO-Revision-Date: 2024-06-19 10:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -19,6 +19,34 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && (n%100<11 || n%100>19) ? 0 : "
 "n%10>=2 && n%10<=9 && (n%100<11 || n%100>19) ? 1 : 2);\n"
 "X-Generator: Poedit 3.4.4\n"
+
+#: .\models.py:41 .\models.py:62
+msgid "Book"
+msgstr "Knyga"
+
+#: .\models.py:42
+msgid "Summary"
+msgstr "Aprašymas"
+
+#: .\models.py:45
+msgid "Author"
+msgstr "Autorius"
+
+#: .\models.py:47 .\models.py:56
+msgid "Genres"
+msgstr "Žanrai"
+
+#: .\models.py:47
+msgid "Select the genres for this book"
+msgstr "Pasirinkite šios knygos žanrus"
+
+#: .\models.py:48
+msgid "Cover"
+msgstr "Viršelis"
+
+#: .\models.py:63 .\templates\base.html:31
+msgid "Books"
+msgstr "Knygos"
 
 #: .\templates\base.html:16
 msgid "Local Library"
@@ -31,10 +59,6 @@ msgstr "Django demo projektas"
 #: .\templates\base.html:28
 msgid "Authors"
 msgstr "Autoriai"
-
-#: .\templates\base.html:31
-msgid "Books"
-msgstr "Knygos"
 
 #: .\templates\base.html:46
 msgid "Instances"

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import date
 from tinymce.models import HTMLField
 from PIL import Image
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class Genre(models.Model):
@@ -37,14 +38,14 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(verbose_name="Pavadinimas", max_length=200)
-    summary = models.TextField(verbose_name="Aprašymas", max_length=1000)
+    title = models.CharField(verbose_name=_("Book"), max_length=200)
+    summary = models.TextField(verbose_name=_("Summary"), max_length=1000)
     isbn = models.CharField(verbose_name="ISBN", max_length=13,
                             help_text='13 Simbolių <a href="https://www.isbn-international.org/content/what-isbn">ISBN kodas</a>')
-    author = models.ForeignKey(to='Author', verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True,
+    author = models.ForeignKey(to='Author', verbose_name=_("Author"), on_delete=models.SET_NULL, null=True, blank=True,
                                related_name='books')
-    genre = models.ManyToManyField(to="Genre", verbose_name="Žanrai", help_text='Išrinkite žanrą(us) šiai knygai')
-    cover = models.ImageField(verbose_name="Viršelis", upload_to="covers", null=True, blank=True)
+    genre = models.ManyToManyField(to="Genre", verbose_name=_("Genres"), help_text=_('Select the genres for this book'))
+    cover = models.ImageField(verbose_name=_("Cover"), upload_to="covers", null=True, blank=True)
 
     def display_genre(self):
         genres = self.genre.all()
@@ -52,14 +53,14 @@ class Book(models.Model):
         result = ", ".join(names)
         return result
 
-    display_genre.short_description = 'Žanras'
+    display_genre.short_description = _("Genres")
 
     def __str__(self):
         return f"{self.title} ({self.author})"
 
     class Meta:
-        verbose_name = "Knyga"
-        verbose_name_plural = "Knygos"
+        verbose_name = _("Book")
+        verbose_name_plural = _("Books")
 
 
 class BookInstance(models.Model):
