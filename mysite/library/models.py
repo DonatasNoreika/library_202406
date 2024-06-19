@@ -71,10 +71,10 @@ class BookInstance(models.Model):
     reader = models.ForeignKey(to=User, verbose_name="Skaitytojas", on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
-        ('a', 'Administruojama'),
-        ('p', 'Paimta'),
-        ('g', 'Galima paimti'),
-        ('r', 'Rezervuota'),
+        ('a', _('Administered')),
+        ('p', _('Taken')),
+        ('g', _('Can be taken')),
+        ('r', _('Reserved')),
     )
 
     status = models.CharField(verbose_name="Būsena", max_length=1, choices=LOAN_STATUS, null=True, blank=True,

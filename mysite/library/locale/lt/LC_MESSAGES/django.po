@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-19 10:35+0300\n"
-"PO-Revision-Date: 2024-06-19 10:35+0300\n"
+"POT-Creation-Date: 2024-06-19 10:48+0300\n"
+"PO-Revision-Date: 2024-06-19 10:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -20,7 +20,7 @@ msgstr ""
 "n%10>=2 && n%10<=9 && (n%100<11 || n%100>19) ? 1 : 2);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: .\models.py:41 .\models.py:62
+#: .\models.py:41 .\models.py:62 .\templates\book.html:3
 msgid "Book"
 msgstr "Knyga"
 
@@ -47,6 +47,22 @@ msgstr "Viršelis"
 #: .\models.py:63 .\templates\base.html:31
 msgid "Books"
 msgstr "Knygos"
+
+#: .\models.py:74
+msgid "Administered"
+msgstr "Administruojama"
+
+#: .\models.py:75
+msgid "Taken"
+msgstr "Paimta"
+
+#: .\models.py:76
+msgid "Can be taken"
+msgstr "Galima paimti"
+
+#: .\models.py:77
+msgid "Reserved"
+msgstr "Rezervuota"
 
 #: .\templates\base.html:16
 msgid "Local Library"
@@ -84,6 +100,42 @@ msgstr "Prisijungti"
 msgid "Search"
 msgstr "Ieškoti"
 
+#: .\templates\book.html:11 .\templates\index.html:11
+msgid "Authors:"
+msgstr "Autoriai:"
+
+#: .\templates\book.html:12
+msgid "Genres:"
+msgstr "Žanrai:"
+
+#: .\templates\book.html:16
+msgid "Comments:"
+msgstr "Komentarai:"
+
+#: .\templates\book.html:20
+msgid "Leave a Comment:"
+msgstr "Palikite komentarą:"
+
+#: .\templates\book.html:24
+msgid "Post"
+msgstr "Paskelbti"
+
+#: .\templates\book.html:34
+msgid "No Comments"
+msgstr "Nėra komentarų"
+
+#: .\templates\book.html:37
+msgid "Instances:"
+msgstr "Knygų kopijos:"
+
+#: .\templates\book.html:43
+msgid "Due back:"
+msgstr "Gražinimo data:"
+
+#: .\templates\book.html:48
+msgid "We do not have copies of this book"
+msgstr "Neturime šios knygos kopijų"
+
 #: .\templates\index.html:6
 msgid "Today we have:"
 msgstr "Šiandien turime:"
@@ -99,10 +151,6 @@ msgstr "Knygų kopijos:"
 #: .\templates\index.html:10
 msgid "Now Available:"
 msgstr "Galima paimti:"
-
-#: .\templates\index.html:11
-msgid "Authors:"
-msgstr "Autoriai:"
 
 #: .\templates\index.html:13
 msgid "Your visits:"
