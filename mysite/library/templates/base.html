@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-
+{% load i18n %}
 {# Header: #}
 <div class="p-5 bg-primary text-white text-center">
-    <h1>Rajono biblioteka</h1>
-    <p>Django demo projektas!</p>
+    <h1>{% trans "Local Library" %}</h1>
+    <p>{% trans "Django demo project" %}</p>
 </div>
 
 {# Navigation: #}
@@ -25,10 +25,10 @@
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'authors' %}">Autoriai</a>
+                <a class="nav-link" href="{% url 'authors' %}">{% trans "Authors" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'books' %}">Knygos</a>
+                <a class="nav-link" href="{% url 'books' %}">{% trans "Books" %}</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
@@ -43,29 +43,29 @@
             </li>
             {% if user.profile.is_employee %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'instances' %}">Egzemplioriai</a>
+                <a class="nav-link" href="{% url 'instances' %}">{% trans "Instances" %}</a>
             </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'my_instances' %}">Paimtos knygos</a>
+                <a class="nav-link" href="{% url 'my_instances' %}">{% trans "My Books" %}</a>
             </li>
             <li class="nav-item">
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button class="nav-link" type="submit">Atsijungti</button>
+                    <button class="nav-link" type="submit">{% trans "Logout" %}</button>
                 </form>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Registruotis</a>
+                <a class="nav-link" href="{% url 'register' %}">{% trans "Register" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Prisijungti</a>
+                <a class="nav-link" href="{% url 'login' %}">{% trans "Login" %}</a>
             </li>
             {% endif %}
         </ul>
         <form action="{% url 'search' %}" method="get" class="d-flex">
-            <input name="query" class="form-control me-2" type="text" placeholder="Paieška">
+            <input name="query" class="form-control me-2" type="text" placeholder='{% trans "Search" %}'>
         </form>
     </div>
 </nav>
