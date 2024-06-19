@@ -137,8 +137,9 @@ def register(request):
                         for message in err:
                             messages.error(request, message)
                         return redirect('register')
-                    # jeigu viskas tvarkoje, sukuriame naują vartotoją
+                    messages.info(request, _('User %s registered!') % username)
                     User.objects.create_user(username=username, email=email, password=password)
+                    return redirect('login')
         else:
             messages.error(request, _('Passwords do not match!'))
             return redirect('register')

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-19 11:00+0300\n"
-"PO-Revision-Date: 2024-06-19 11:02+0300\n"
+"POT-Creation-Date: 2024-06-19 11:09+0300\n"
+"PO-Revision-Date: 2024-06-19 11:10+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -156,16 +156,21 @@ msgstr "Galima paimti:"
 msgid "Your visits:"
 msgstr "Apsilankymų skaičius:"
 
-#: .\views.py:158
+#: .\views.py:126
 #, python-format
 msgid "Username %s already exists!"
 msgstr "Vartotojo vardas %s užimtas!"
 
-#: .\views.py:163
+#: .\views.py:131
 #, python-format
 msgid "Email %s already exists!"
 msgstr "Vartotojas su el. paštu %s jau užregistruotas!"
 
-#: .\views.py:174
+#: .\views.py:140
+#, python-format
+msgid "User %s registered!"
+msgstr "Vartotojas %s registruotas!"
+
+#: .\views.py:144
 msgid "Passwords do not match!"
 msgstr "Slaptažodžiai nesutampa!"
